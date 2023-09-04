@@ -26,7 +26,7 @@ const Products = () => {
         <div
           key={product.id}
           onClick={() => {
-            navigate(`/products/product-detail/${product.id}`);
+            navigate(`/products/${product.id}`);
           }}>
           {product.model}
         </div>

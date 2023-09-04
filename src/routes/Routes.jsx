@@ -8,7 +8,7 @@ const router = createBrowserRouter(
     <Route element={<App />}>
       <Route path='' element={<Navigate to='products' />} />
       <Route path='products' element={<Products />} />
-      <Route path='products/product-detail/:id' element={<ProductDetail />} />
+      <Route path='products/:id' element={<ProductDetail />} />
     </Route>
   )
 );
