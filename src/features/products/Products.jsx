@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGetProductsQuery } from '@/services/query/productApi';
 import SearchBar from '@/components/SearchBar/SearchBar';
 
 const Products = () => {
+  const navigate = useNavigate();
+
   const [inputValue, setInputValue] = useState('');
   const { data: products } = useGetProductsQuery();
 
@@ -20,7 +23,13 @@ const Products = () => {
         }}
       />
       {filteredProducts?.map((product) => (
-        <div key={product.id}>{product.model}</div>
+        <div
+          key={product.id}
+          onClick={() => {
+            navigate(`/products/product-detail/${product.id}`);
+          }}>
+          {product.model}
+        </div>
       ))}
     </>
   );
