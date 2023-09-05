@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useGetProductsQuery } from '@/services/query/productApi';
 import SearchBar from '@/components/SearchBar/SearchBar';
+import ItemList from './components/itemList';
 
 const Products = () => {
-  const navigate = useNavigate();
-
   const [inputValue, setInputValue] = useState('');
   const { data: products } = useGetProductsQuery();
 
@@ -16,26 +14,20 @@ const Products = () => {
   );
 
   return (
-    <>
+    <div className='flex flex-col p-6 gap-4'>
       <SearchBar
+        className='flex self-end'
+        placeholder='Search...'
         onChange={(e) => {
           setInputValue(e.target.value);
         }}
       />
-      {filteredProducts?.map((product) => (
-        <div
-          key={product.id}
-          onClick={() => {
-            navigate('/products/product-detail', {
-              state: {
-                id: product.id,
-              },
-            });
-          }}>
-          {product.model}
-        </div>
-      ))}
-    </>
+      <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        {filteredProducts?.map((product) => (
+          <ItemList key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
   );
 };
 
