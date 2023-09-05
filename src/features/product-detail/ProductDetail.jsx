@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useGetProductDetailQuery } from '@/services/query/productApi';
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { state } = useLocation();
 
-  const { data: product } = useGetProductDetailQuery(id);
+  const { data: product } = useGetProductDetailQuery(state?.id);
 
   return (
     <>
