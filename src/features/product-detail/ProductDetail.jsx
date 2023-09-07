@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import { useGetProductDetailQuery } from '@/services/query/productApi';
 import Description from './components/Description';
 import Actions from './components/Actions';
-import { usePreviousRoute } from '@/hooks/UsePreviousRoute';
+import usePreviousRoute from '@/hooks/UsePreviousRoute';
 
 const ProductDetail = () => {
   const { state } = useLocation();
