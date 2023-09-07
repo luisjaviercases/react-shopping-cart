@@ -6,6 +6,7 @@ const ItemList = ({ product }) => {
 
   return (
     <div
+      data-testid='product-item-list'
       className='w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden cursor-pointer'
       onClick={() => {
         navigate('/products/product-detail', {
