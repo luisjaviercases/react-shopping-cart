@@ -14,14 +14,14 @@ const Breadcrumbs = () => {
     return (
       <li key={crumb} className='flex items-center'>
         {breadCrumbRoutes[breadCrumbRoutes.length - 1] === crumb ? (
-          <span className='text-gray-500'>{crumb}</span>
+          <span className='text-white'>{crumb}</span>
         ) : (
-          <Link to={currentLink} className='text-blue-500 hover:underline'>
+          <Link to={currentLink} className='text-white hover:underline'>
             {crumb}
           </Link>
         )}
         {index < breadCrumbRoutes.length - 1 && (
-          <span className='mx-1'>
+          <span className='mx-1 text-white'>
             <svg
               className='fill-current stroke-0 h-3.5 w-3.5 transform -rotate-90'
               xmlns='http://www.w3.org/2000/svg'
