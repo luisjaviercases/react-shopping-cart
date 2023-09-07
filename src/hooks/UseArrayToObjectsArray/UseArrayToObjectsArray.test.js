@@ -1,6 +1,6 @@
 import { expect, describe, it } from 'vitest';
 import { renderHook } from '@testing-library/react';
-import useArrayToObjectsArray from '@/hooks/useArrayToObjectsArray';
+import useArrayToObjectsArray from '@/hooks/UseArrayToObjectsArray/UseArrayToObjectsArray';
 
 describe('useArrayToObjectsArray hook', () => {
   it('try to convert empty array should return empty array', () => {

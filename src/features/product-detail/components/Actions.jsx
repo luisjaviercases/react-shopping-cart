@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from '@/components/Dropdown/Dropdown';
-import useArrayToObjectsArray from '@/hooks/useArrayToObjectsArray';
+import useArrayToObjectsArray from '@/hooks/UseArrayToObjectsArray/UseArrayToObjectsArray';
 import Button from '@/components/Button/Button';
 
 const Actions = ({ product, className }) => {
