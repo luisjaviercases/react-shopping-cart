@@ -7,6 +7,7 @@ const baseApi = createApi({
   reducerPath: BASE_API_REDUCER_KEY,
   baseQuery: apiClient,
   endpoints: () => ({}),
+  keepUnusedDataFor: 60 * 60, // keep data in cache for one hour
 });
 
 export default baseApi;
