@@ -1,14 +1,19 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dropdown from '@/components/Dropdown/Dropdown';
-import useArrayToObjectsArray from '@/hooks/UseArrayToObjectsArray/UseArrayToObjectsArray';
+import useConvertToDropdownEntry from '@/hooks/UseConvertToDropdownEntry/UseConvertToDropdownEntry';
 import Button from '@/components/Button/Button';
+import { addToCart } from '@/state/cart/cartSlice';
+import { useAddProductToCartMutation } from '@/services/query/cartApi';
 
 const Actions = ({ product, className }) => {
-  const internalMemoryDropdownOptions = useArrayToObjectsArray(product?.internalMemory);
-  const colorsDropdownOptions = useArrayToObjectsArray(product?.colors);
+  const internalMemoryDropdownOptions = useConvertToDropdownEntry(product?.options?.storages);
+  const colorsDropdownOptions = useConvertToDropdownEntry(product?.options?.colors);
   const [selectedInternalMemoryOption, setSelectedInternalMemoryOption] = useState(null);
   const [selectedColorOption, setSelectedColorOption] = useState(null);
+  const [addProductToCart] = useAddProductToCartMutation();
+  const dispatch = useDispatch();
 
   const handleSelectInternalMemory = (selectedOption) => {
     setSelectedInternalMemoryOption(selectedOption.value);
@@ -18,8 +23,18 @@ const Actions = ({ product, className }) => {
     setSelectedColorOption(selectedOption.value);
   };
 
-  const handleClick = () => {
-    console.log('Hacer petición enviando los datos');
+  const handleClick = async () => {
+    const data = {
+      id: product?.id,
+      colorCode: 1,
+      storageCode: 1,
+    };
+    try {
+      const response = await addProductToCart(data).unwrap();
+      dispatch(addToCart(response.count));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
