@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import useOnClickOutside from '@/hooks/UseOnClickOutside';
 
 const Dropdown = ({ label, options, onSelect }) => {
+  const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -23,8 +25,14 @@ const Dropdown = ({ label, options, onSelect }) => {
     onSelect(option);
   };
 
+  useOnClickOutside(dropdownRef, () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  });
+
   return (
-    <div className='flex flex-col max-w-fit'>
+    <div className='flex flex-col max-w-fit' ref={dropdownRef}>
       {label && <label className='text-sm font-medium mb-1'>{label}</label>}
       <div className='relative inline-block text-left'>
         <button
