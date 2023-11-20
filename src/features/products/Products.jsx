@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useGetProductsQuery } from '@/services/query/productApi';
 import SearchBar from '@/components/SearchBar/SearchBar';
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 import ItemList from './components/itemList';
 
 const Products = () => {
   const [inputValue, setInputValue] = useState('');
-  const { data: products } = useGetProductsQuery();
+  const { data: products, isLoading: loadingProducts } = useGetProductsQuery();
 
   const filteredProducts = products?.filter(
     (product) =>
@@ -22,11 +23,15 @@ const Products = () => {
           setInputValue(e.target.value);
         }}
       />
-      <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-        {filteredProducts?.map((product) => (
-          <ItemList key={product.id} product={product} />
-        ))}
-      </div>
+      {loadingProducts ? (
+        <LoadingSpinner />
+      ) : (
+        <div className='grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+          {filteredProducts?.map((product) => (
+            <ItemList key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
