@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Button from '@/components/Button/Button';
+import breadcrumbConfig from '@/config/BreadcrumbsList';
 import { clearCart } from '@/state/cart/cartSlice';
 
 const Header = () => {
@@ -19,7 +20,7 @@ const Header = () => {
           <Link to='/' className='text-white text-2xl font-bold'>
             Front-End Test
           </Link>
-          <Breadcrumbs />
+          <Breadcrumbs breadcrumbData={breadcrumbConfig} />
         </div>
         <div className='flex flex-col'>
           <span className='text-white'>Number of elements in cart = {cart}</span>
