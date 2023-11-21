@@ -1,20 +1,15 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ItemList = ({ product }) => {
-  const navigate = useNavigate();
-
   return (
-    <div
+    <Link
+      to='/products/product-detail'
+      state={{
+        id: product.id,
+      }}
       data-testid='product-item-list'
-      className='w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden cursor-pointer'
-      onClick={() => {
-        navigate('/products/product-detail', {
-          state: {
-            id: product.id,
-          },
-        });
-      }}>
+      className='w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden cursor-pointer'>
       <div className='flex items-center justify-center h-auto py-3'>
         <img src={product.imgUrl} />
       </div>
@@ -23,7 +18,7 @@ const ItemList = ({ product }) => {
         <span className='text-gray-500 mt-2'>Model: {product.model}</span>
         <span className='text-gray-500 mt-2'>Price: {product.price !== '' ? product.price : 'NOT AVAILABLE'}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 
