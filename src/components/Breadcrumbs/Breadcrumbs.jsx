@@ -1,10 +1,10 @@
 import { useLocation, Link } from 'react-router-dom';
-import breadcrumbConfig from '../../config/BreadcrumbsList';
+import PropTypes from 'prop-types';
 
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ breadcrumbData }) => {
   const location = useLocation();
 
-  const findBreadcrumbItem = (path) => breadcrumbConfig.find((item) => item.path === path);
+  const findBreadcrumbItem = (path) => breadcrumbData.find((item) => item.path === path);
 
   const generateBreadcrumbs = () => {
     const pathSegments = location.pathname.split('/').filter((crumb) => crumb !== '');
@@ -13,22 +13,24 @@ const Breadcrumbs = () => {
       const currentPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
       const breadcrumbItem = findBreadcrumbItem(currentPath);
 
+      const isLastSegment = index === pathSegments.length - 1;
+
       return (
         <li key={currentPath} className='flex items-center'>
           {breadcrumbItem ? (
             <>
-              {breadcrumbItem.path === currentPath ? (
-                <span className='text-white'>{breadcrumbItem.label}</span>
-              ) : (
+              {!isLastSegment ? (
                 <Link to={currentPath} className='text-white hover:underline'>
                   {breadcrumbItem.label}
                 </Link>
+              ) : (
+                <span className='text-white'>{breadcrumbItem.label}</span>
               )}
             </>
           ) : (
             <span className='text-white'>{segment}</span>
           )}
-          {index < pathSegments.length - 1 && (
+          {!isLastSegment && (
             <span className='mx-1 text-white'>
               <svg
                 className='fill-current stroke-0 h-3.5 w-3.5 transform -rotate-90'
@@ -48,6 +50,10 @@ const Breadcrumbs = () => {
       <ul className='flex'>{generateBreadcrumbs()}</ul>
     </nav>
   );
+};
+
+Breadcrumbs.propTypes = {
+  breadcrumbData: PropTypes.array,
 };
 
 export default Breadcrumbs;
