@@ -2,13 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { expect, describe, it } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Breadcrumbs from './Breadcrumbs';
+import breadcrumbConfig from '@/config/BreadcrumbsList';
 
 describe('Breadcrumbs component', () => {
   it('render breadcrumbs with links', () => {
     render(
       <MemoryRouter initialEntries={['/products/product-detail']}>
         <Routes>
-          <Route path='*' element={<Breadcrumbs />} />
+          <Route path='*' element={<Breadcrumbs breadcrumbData={breadcrumbConfig} />} />
         </Routes>
       </MemoryRouter>
     );
@@ -21,12 +22,12 @@ describe('Breadcrumbs component', () => {
     render(
       <MemoryRouter initialEntries={['/products/product-detail']}>
         <Routes>
-          <Route path='*' element={<Breadcrumbs />} />
+          <Route path='*' element={<Breadcrumbs breadcrumbData={breadcrumbConfig} />} />
         </Routes>
       </MemoryRouter>
     );
 
-    const lastBreadcrumb = screen.getByText('product-detail');
+    const lastBreadcrumb = screen.getByText('Product Detail');
     expect(lastBreadcrumb.tagName).toBe('SPAN');
   });
 });
