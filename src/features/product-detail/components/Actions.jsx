@@ -10,24 +10,28 @@ import { useAddProductToCartMutation } from '@/services/query/cartApi';
 const Actions = ({ product, className }) => {
   const internalMemoryDropdownOptions = useConvertToDropdownEntry(product.options.storages);
   const colorsDropdownOptions = useConvertToDropdownEntry(product.options.colors);
-  const [selectedInternalMemoryOption, setSelectedInternalMemoryOption] = useState(null);
-  const [selectedColorOption, setSelectedColorOption] = useState(null);
+  const [selectedInternalMemoryOption, setSelectedInternalMemoryOption] = useState(
+    internalMemoryDropdownOptions.length === 1 ? internalMemoryDropdownOptions[0] : null
+  );
+  const [selectedColorOption, setSelectedColorOption] = useState(
+    colorsDropdownOptions.length === 1 ? colorsDropdownOptions[0] : null
+  );
   const [addProductToCart] = useAddProductToCartMutation();
   const dispatch = useDispatch();
 
   const handleSelectInternalMemory = (selectedOption) => {
-    setSelectedInternalMemoryOption(selectedOption.value);
+    setSelectedInternalMemoryOption(selectedOption);
   };
 
   const handleSelectColors = (selectedOption) => {
-    setSelectedColorOption(selectedOption.value);
+    setSelectedColorOption(selectedOption);
   };
 
   const handleClick = async () => {
     const data = {
       id: product.id,
-      colorCode: selectedColorOption,
-      storageCode: selectedInternalMemoryOption,
+      colorCode: selectedColorOption.value,
+      storageCode: selectedInternalMemoryOption.value,
     };
     try {
       const response = await addProductToCart(data).unwrap();
@@ -44,8 +48,14 @@ const Actions = ({ product, className }) => {
           label='Internal memory'
           options={internalMemoryDropdownOptions}
           onSelect={handleSelectInternalMemory}
+          selectedOption={selectedInternalMemoryOption}
         />
-        <Dropdown label='Color' options={colorsDropdownOptions} onSelect={handleSelectColors} />
+        <Dropdown
+          label='Color'
+          options={colorsDropdownOptions}
+          onSelect={handleSelectColors}
+          selectedOption={selectedColorOption}
+        />
       </div>
       <Button onClick={handleClick} disabled={selectedInternalMemoryOption === null || selectedColorOption === null}>
         Add to cart
