@@ -8,8 +8,8 @@ import { addToCart } from '@/state/cart/cartSlice';
 import { useAddProductToCartMutation } from '@/services/query/cartApi';
 
 const Actions = ({ product, className }) => {
-  const internalMemoryDropdownOptions = useConvertToDropdownEntry(product?.options?.storages);
-  const colorsDropdownOptions = useConvertToDropdownEntry(product?.options?.colors);
+  const internalMemoryDropdownOptions = useConvertToDropdownEntry(product.options.storages);
+  const colorsDropdownOptions = useConvertToDropdownEntry(product.options.colors);
   const [selectedInternalMemoryOption, setSelectedInternalMemoryOption] = useState(null);
   const [selectedColorOption, setSelectedColorOption] = useState(null);
   const [addProductToCart] = useAddProductToCartMutation();
@@ -25,7 +25,7 @@ const Actions = ({ product, className }) => {
 
   const handleClick = async () => {
     const data = {
-      id: product?.id,
+      id: product.id,
       colorCode: 1,
       storageCode: 1,
     };
