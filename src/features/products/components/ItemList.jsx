@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { formatPrice } from '@/helpers/formatPrice';
 
 const ItemList = ({ product }) => {
   return (
@@ -16,7 +17,7 @@ const ItemList = ({ product }) => {
       <div className='flex flex-col px-5 py-3'>
         <h3 className='text-gray-700'>Brand: {product.brand}</h3>
         <span className='text-gray-500 mt-2'>Model: {product.model}</span>
-        <span className='text-gray-500 mt-2'>Price: {product.price !== '' ? product.price : 'NOT AVAILABLE'}</span>
+        <span className='text-gray-500 mt-2'>Price: {formatPrice(product?.price)}</span>
       </div>
     </Link>
   );
