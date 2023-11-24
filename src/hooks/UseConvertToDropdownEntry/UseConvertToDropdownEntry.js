@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 
 const useConvertToDropdownEntry = (arrayToConvert) => {
-  const [convertedArray, seConvertedArray] = useState([]);
-
-  useEffect(() => {
-    const converted = arrayToConvert?.map((item) => ({
-      label: item.name,
-      value: item.code,
-    }));
-
-    seConvertedArray(converted);
+  const convertedArray = useMemo(() => {
+    return (
+      arrayToConvert?.map((item) => ({
+        label: item.name,
+        value: item.code,
+      })) || []
+    );
   }, [arrayToConvert]);
 
   return convertedArray;
