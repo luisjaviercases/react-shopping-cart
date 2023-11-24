@@ -1,26 +1,16 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import useOnClickOutside from '@/hooks/UseOnClickOutside';
 
-const Dropdown = ({ label, options, onSelect }) => {
+const Dropdown = ({ label, options, onSelect, selectedOption }) => {
   const dropdownRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  useEffect(() => {
-    // If options array only has one option, select first option by default
-    if (options?.length === 1) {
-      setSelectedOption(options[0]);
-      onSelect(options[0]);
-    }
-  }, [onSelect, options]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleSelect = (option) => {
-    setSelectedOption(option);
     setIsOpen(false);
     onSelect(option);
   };
@@ -73,6 +63,7 @@ Dropdown.propTypes = {
   label: PropTypes.string,
   options: PropTypes.array,
   onSelect: PropTypes.func,
+  selectedOption: PropTypes.object,
 };
 
 export default Dropdown;
