@@ -32,7 +32,7 @@ const ProductDetail = () => {
         ) : (
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-4'>
             <div className='md:col-span-1'>
-              <img src={product?.imgUrl} alt={product?.name} className='w-56 h-auto' />
+              <img src={product.imgUrl} alt={product.name} className='w-56 h-auto' />
             </div>
             <div className='md:col-span-1'>
               <Description product={product} />
