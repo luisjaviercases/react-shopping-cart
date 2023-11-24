@@ -20,36 +20,36 @@ const Description = ({ product }) => {
   return (
     <ul className='list-disc pl-4'>
       <li>
-        <span>Brand: {product?.brand}</span>
+        <span>Brand: {product.brand}</span>
       </li>
       <li>
-        <span>Model: {product?.model}</span>
+        <span>Model: {product.model}</span>
       </li>
       <li>
-        <span>Price: {formatPrice(product?.price)}</span>
+        <span>Price: {formatPrice(product.price)}</span>
       </li>
       <li>
-        <span>CPU: {product?.cpu}</span>
+        <span>CPU: {product.cpu}</span>
       </li>
       <li>
-        <span>RAM: {product?.ram}</span>
+        <span>RAM: {product.ram}</span>
       </li>
       <li>
-        <span>OS: {product?.os}</span>
+        <span>OS: {product.os}</span>
       </li>
       <li>
-        <span>Display Resolution: {product?.displayResolution}</span>
+        <span>Display Resolution: {product.displayResolution}</span>
       </li>
       <li>
-        <span>Battery: {product?.battery}</span>
+        <span>Battery: {product.battery}</span>
       </li>
-      {product?.primaryCamera && renderCameraProperties('Primary camera', product.primaryCamera)}
-      {product?.secondaryCmera && renderCameraProperties('Secondary camera', product.secondaryCmera)}
+      {product.primaryCamera && renderCameraProperties('Primary camera', product.primaryCamera)}
+      {product.secondaryCmera && renderCameraProperties('Secondary camera', product.secondaryCmera)}
       <li>
-        <span>Dimensions: {product?.dimentions}</span>
+        <span>Dimensions: {product.dimentions}</span>
       </li>
       <li>
-        <span>Weight: {product?.weight}</span>
+        <span>Weight: {product.weight}</span>
       </li>
     </ul>
   );
