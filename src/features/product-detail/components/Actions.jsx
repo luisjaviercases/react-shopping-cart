@@ -26,8 +26,8 @@ const Actions = ({ product, className }) => {
   const handleClick = async () => {
     const data = {
       id: product.id,
-      colorCode: 1,
-      storageCode: 1,
+      colorCode: selectedColorOption,
+      storageCode: selectedInternalMemoryOption,
     };
     try {
       const response = await addProductToCart(data).unwrap();
