@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { formatPrice } from '@/helpers/formatPrice';
 
 const Description = ({ product }) => {
   const renderCameraProperties = (cameraType, renderElement) => {
@@ -25,7 +26,7 @@ const Description = ({ product }) => {
         <span>Model: {product?.model}</span>
       </li>
       <li>
-        <span>Price: {product?.price}</span>
+        <span>Price: {formatPrice(product?.price)}</span>
       </li>
       <li>
         <span>CPU: {product?.cpu}</span>
