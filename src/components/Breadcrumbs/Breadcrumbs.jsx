@@ -1,17 +1,16 @@
 import { useLocation, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { findBreadcrumbItem } from '@/utils/breadcrumbUtils';
 
 const Breadcrumbs = ({ breadcrumbData }) => {
   const location = useLocation();
-
-  const findBreadcrumbItem = (path) => breadcrumbData.find((item) => item.path === path);
 
   const generateBreadcrumbs = () => {
     const pathSegments = location.pathname.split('/').filter((crumb) => crumb !== '');
 
     return pathSegments.map((segment, index) => {
       const currentPath = `/${pathSegments.slice(0, index + 1).join('/')}`;
-      const breadcrumbItem = findBreadcrumbItem(currentPath);
+      const breadcrumbItem = findBreadcrumbItem(breadcrumbData, currentPath);
 
       const isLastSegment = index === pathSegments.length - 1;
 
