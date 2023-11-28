@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { formatPrice } from '@/helpers/formatPrice';
+import { formatPrice } from '@/utils/productUtils';
 
 const Description = ({ product }) => {
   const renderCameraProperties = (cameraType, renderElement) => {
