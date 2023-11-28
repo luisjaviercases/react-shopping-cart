@@ -10,8 +10,7 @@ const router = createBrowserRouter(
       <Route path='' element={<Navigate to='products' />} />
       <Route path='products' element={<Products />} />
       <Route path='products/product-detail' element={<ProductDetail />} />
-      <Route path='*' element={<Navigate replace to='/404' />} />
-      <Route path='/404' element={<PageNotFound />} />
+      <Route path='*' element={<PageNotFound />} />
     </Route>
   )
 );
