@@ -3,11 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import Button from '@/components/Button/Button';
 import breadcrumbConfig from '@/config/BreadcrumbsList';
+import { findBreadcrumbItem } from '@/utils/breadcrumbUtils';
 import { clearCart } from '@/state/cart/cartSlice';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  const { pathname } = useLocation();
+  const shouldShowBreadcrumbs = findBreadcrumbItem(breadcrumbConfig, pathname);
 
   const handleClick = () => {
     dispatch(clearCart());
@@ -20,7 +25,7 @@ const Header = () => {
           <Link to='/' className='text-white text-2xl font-bold'>
             Front-End Test
           </Link>
-          <Breadcrumbs breadcrumbData={breadcrumbConfig} />
+          {shouldShowBreadcrumbs && <Breadcrumbs breadcrumbData={breadcrumbConfig} />}
         </div>
         <div className='flex flex-col'>
           <span className='text-white'>Number of elements in cart = {cart}</span>
